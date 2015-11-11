@@ -123,7 +123,7 @@ max.steps.interval &lt;- activity.timeseries.mean.sorted[1,1]</code></pre>
 <pre class="r"><code>apply(is.na(activity),2,sum)</code></pre>
 <pre><code>##    steps     date interval 
 ##     2304        0        0</code></pre>
-<p>To fill in the missing data, we add the mean number of steps per interval for every interval that is missing data (in other words, we fill in the ‘steps’ value corresponding to that interval found in the <code>activity.timeseries.mean</code> dataframe we used in the previous section):</p>
+<p>To fill in the missing data, we add the mean number of steps per interval for every interval that is missing data (found in the <code>activity.timeseries.mean</code> dataframe we used in the previous section):</p>
 <pre class="r"><code>activity.nomissing &lt;- cbind(activity,activity.timeseries.mean[2])
 activity.nomissing$steps[is.na(activity.nomissing$steps)] &lt;- 
   activity.nomissing$steps.mean[is.na(activity.nomissing$steps)]

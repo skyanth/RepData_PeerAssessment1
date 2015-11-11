@@ -105,8 +105,7 @@ apply(is.na(activity),2,sum)
 ```
 
 To fill in the missing data, we add the mean number of steps per interval for 
-every interval that is missing data (in other words, we fill in the 'steps' 
-value corresponding to that interval found in the `activity.timeseries.mean` 
+every interval that is missing data (found in the `activity.timeseries.mean` 
 dataframe we used in the previous section):
 
 
