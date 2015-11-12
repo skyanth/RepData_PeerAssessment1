@@ -57,8 +57,21 @@ hist(activity.day.total$total.steps, breaks=8,
 ```r
 steps.mean <- format(mean(activity.day.total$total.steps, na.rm=TRUE), 
                      scientific=F)
+steps.mean
+```
+
+```
+## [1] "10766.19"
+```
+
+```r
 steps.median <- format(median(activity.day.total$total.steps, na.rm=TRUE), 
                        scientific=F)
+steps.median
+```
+
+```
+## [1] "10765"
 ```
 
 The mean of the total number of steps taken per day is __10766.19__ and the 
@@ -88,6 +101,15 @@ max.steps <- max(activity.timeseries.mean$steps.mean)
 activity.timeseries.mean.sorted <- 
   activity.timeseries.mean[rev(order(activity.timeseries.mean$steps.mean)),]
 max.steps.interval <- activity.timeseries.mean.sorted[1,1]
+max.steps.interval
+```
+
+```
+## Source: local data frame [1 x 1]
+## 
+##   interval
+##      (int)
+## 1      835
 ```
 
 On average across all the days in the dataset, the highest number of steps 
@@ -162,8 +184,21 @@ hist(activity.nomissing.day.total$total.steps, breaks=8,
 ```r
 steps.mean.nomissing <- format(mean(activity.nomissing.day.total$total.steps), 
                                scientific=F)
+steps.mean.nomissing
+```
+
+```
+## [1] "10766.19"
+```
+
+```r
 steps.median.nomissing <- format(median(activity.nomissing.day.total$total.steps), 
                                  scientific=F)
+steps.median.nomissing
+```
+
+```
+## [1] "10766.19"
 ```
 
 The mean of the total number of steps taken per day when data has been filled in 

@@ -98,8 +98,12 @@ hist(activity.day.total$total.steps, breaks=8,
 <h3>Mean and median</h3>
 <pre class="r"><code>steps.mean &lt;- format(mean(activity.day.total$total.steps, na.rm=TRUE), 
                      scientific=F)
-steps.median &lt;- format(median(activity.day.total$total.steps, na.rm=TRUE), 
-                       scientific=F)</code></pre>
+steps.mean</code></pre>
+<pre><code>## [1] &quot;10766.19&quot;</code></pre>
+<pre class="r"><code>steps.median &lt;- format(median(activity.day.total$total.steps, na.rm=TRUE), 
+                       scientific=F)
+steps.median</code></pre>
+<pre><code>## [1] &quot;10765&quot;</code></pre>
 <p>The mean of the total number of steps taken per day is <strong>10766.19</strong> and the median is <strong>10765</strong>.</p>
 </div>
 </div>
@@ -118,7 +122,13 @@ ggplot(activity.timeseries.mean, aes(interval, steps.mean)) +
 <pre class="r"><code>max.steps &lt;- max(activity.timeseries.mean$steps.mean)
 activity.timeseries.mean.sorted &lt;- 
   activity.timeseries.mean[rev(order(activity.timeseries.mean$steps.mean)),]
-max.steps.interval &lt;- activity.timeseries.mean.sorted[1,1]</code></pre>
+max.steps.interval &lt;- activity.timeseries.mean.sorted[1,1]
+max.steps.interval</code></pre>
+<pre><code>## Source: local data frame [1 x 1]
+## 
+##   interval
+##      (int)
+## 1      835</code></pre>
 <p>On average across all the days in the dataset, the highest number of steps (206.1698113) is taken in interval <strong>835</strong>.</p>
 </div>
 <div id="imputing-missing-values" class="section level2">
@@ -152,8 +162,12 @@ hist(activity.nomissing.day.total$total.steps, breaks=8,
 <h3>Mean and median with filled in data</h3>
 <pre class="r"><code>steps.mean.nomissing &lt;- format(mean(activity.nomissing.day.total$total.steps), 
                                scientific=F)
-steps.median.nomissing &lt;- format(median(activity.nomissing.day.total$total.steps), 
-                                 scientific=F)</code></pre>
+steps.mean.nomissing</code></pre>
+<pre><code>## [1] &quot;10766.19&quot;</code></pre>
+<pre class="r"><code>steps.median.nomissing &lt;- format(median(activity.nomissing.day.total$total.steps), 
+                                 scientific=F)
+steps.median.nomissing</code></pre>
+<pre><code>## [1] &quot;10766.19&quot;</code></pre>
 <p>The mean of the total number of steps taken per day when data has been filled in is <strong>10766.19</strong> and the median is <strong>10766.19</strong>. Note that the mean is <strong>exactly the same</strong> as before after this operation, but the median is now ever so slightly higher - indeed it has become <strong>equal to the mean</strong>.</p>
 </div>
 </div>
