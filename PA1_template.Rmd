@@ -10,6 +10,10 @@ output:
 ```{r echo=TRUE}
 library(dplyr)
 library(ggplot2)
+# unzip file if necessary
+if(!file.exists("activity.csv")) { 
+  unzip ("activity.zip", exdir=".")
+}
 activity <- read.csv("activity.csv", na.strings="NA")
 ```
 
@@ -27,7 +31,7 @@ This gives us the following histogram:
 
 ```{r echo=TRUE}
 names(activity.day.total) <- c('date', 'total.steps')
-hist(activity.day.total$total.steps, breaks=10, 
+hist(activity.day.total$total.steps, breaks=8, 
      main="Total number of steps per day", xlab="Steps per day")
 ```
 
@@ -40,8 +44,8 @@ steps.median <- format(median(activity.day.total$total.steps, na.rm=TRUE),
                        scientific=F)
 ```
 
-The mean of the total number of steps taken per day is `r steps.mean` and the 
-median is `r steps.median`.
+The mean of the total number of steps taken per day is __`r steps.mean`__ and the 
+median is __`r steps.median`__.
 
 ## What is the average daily activity pattern?
 
@@ -71,15 +75,15 @@ On average across all the days in the dataset, the highest number of steps
 ## Imputing missing values
 
 Calculating the missing values for each column, we see that only the 'steps' 
-column is missing data.
+column is missing data:
 
 ``` {r echo=T}
 apply(is.na(activity),2,sum)
 ```
 
 To fill in the missing data, we add the mean number of steps per interval for 
-every interval that is missing data (found in the `activity.timeseries.mean` 
-dataframe we used in the previous section):
+every interval that is missing data (calculated and stored in the `activity.timeseries.mean` 
+dataframe in the previous section):
 
 ``` {r echo=T}
 activity.nomissing <- cbind(activity,activity.timeseries.mean[2])
@@ -87,6 +91,11 @@ activity.nomissing$steps[is.na(activity.nomissing$steps)] <-
   activity.nomissing$steps.mean[is.na(activity.nomissing$steps)]
 drop <- c('steps.mean')
 activity.nomissing <- activity.nomissing[,!names(activity.nomissing) %in% drop]
+```
+
+This gives us a dataframe with no missing data:
+
+``` {r echo=T}
 apply(is.na(activity.nomissing),2,sum)
 ```
 
@@ -105,7 +114,7 @@ This gives us the following histogram:
 
 ```{r echo=TRUE}
 names(activity.nomissing.day.total) <- c('date', 'total.steps')
-hist(activity.nomissing.day.total$total.steps, breaks=10, 
+hist(activity.nomissing.day.total$total.steps, breaks=8, 
      main="Total number of steps per day", xlab="Steps per day")
 ```
 
@@ -119,9 +128,9 @@ steps.median.nomissing <- format(median(activity.nomissing.day.total$total.steps
 ```
 
 The mean of the total number of steps taken per day when data has been filled in 
-is `r steps.mean.nomissing` and the median is `r steps.median.nomissing`. Note 
-that the mean is exactly the same as before after this operation, but the median 
-is now ever so slightly higher (indeed it has become equal to the mean).
+is __`r steps.mean.nomissing`__ and the median is __`r steps.median.nomissing`__. Note 
+that the mean is __exactly the same__ as before after this operation, but the median 
+is now ever so slightly higher - indeed it has become __equal to the mean__.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -144,3 +153,5 @@ ggplot(activity.wday.timeseries.mean, aes(as.integer(interval), steps.mean)) +
     ylab("Average Number of Steps") +    
     facet_grid(time.of.week ~ .)
 ```
+
+From this plot we can see that there is more general activity throughout the day in weekends, whereas weekdays are characterized by an activity spike in the morning and less activity later in the day. 
